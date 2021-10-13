@@ -132,7 +132,7 @@ public class CheckerboardFunction {
 	public static void copyWin() {
 		//根据当前页面选择使用的棋盘属性
 		Checkerboard checkerboard = Checkerboard.getCheckerboard(Common.getCommon().getCurrent_page());
-		int[][] win = new int[2][1020];
+		int[][] win = new int[2][672];
 		for(int i = 0; i < 2; i++) {
 			for(int j = 0; j < 672; j++) {
 				win[i][j] = checkerboard.getWin()[i][j];

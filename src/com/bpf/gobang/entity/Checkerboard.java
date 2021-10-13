@@ -61,7 +61,7 @@ public class Checkerboard {
   	//机器人落子点获胜组合（备份记录，用与悔棋）
   	private List<boolean[][][]> robotTableRecord = new ArrayList<boolean[][][]>();
   	//所有能赢的情况
-  	private int[][] win = new int[2][1020];
+  	private int[][] win = new int[2][672];
   	//所有能赢的情况（备份记录，用与悔棋）
   	private List<int[][]> winRecord = new ArrayList<int[][]>();
   	//玩家与电脑得分
