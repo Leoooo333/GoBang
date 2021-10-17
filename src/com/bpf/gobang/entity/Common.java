@@ -43,6 +43,12 @@ public class Common {
 	
 	//当前页面
 	private String current_page;
+	//登录界面标识
+	public static final String LOGIN = "login";
+	//普通用户界面
+	public static final String PLAYER_MENU = "player_menu";
+	//管理员界面
+	public static final String ADMIN_MENU = "admin_menu";
 	//菜单页面标识
 	public static final String MENU = "menu";
 	//人机对战难度菜单页面标识
@@ -109,7 +115,7 @@ public class Common {
 			properties.load(inputStream);
 			
 			current_button = "";
-			current_page = "menu";
+			current_page = "login";
 			current_status = true;
 			SCREEN_WIDTH = Toolkit.getDefaultToolkit().getScreenSize().width;
 			SCREEN_HEIGHT = Toolkit.getDefaultToolkit().getScreenSize().height;

@@ -1,8 +1,11 @@
 package com.bpf.gobang.role;
 
+import java.util.ArrayList;
+
 import com.bpf.gobang.algorithm.CheckerboardAlgorithm;
 import com.bpf.gobang.entity.Checkerboard;
 import com.bpf.gobang.entity.Common;
+import com.bpf.gobang.entity.Record;
 import com.bpf.gobang.frame.CheckerboardFrame;
 import com.bpf.gobang.function.CheckerboardFunction;
 
@@ -16,14 +19,14 @@ import com.bpf.gobang.function.CheckerboardFunction;
 public class Player implements ChessPlayer{
 	//存储当前棋子颜色信息，false为黑色，true为白色
 	private boolean current_chess_piece;
-	//获取棋盘通用属性
-	Checkerboard checkerboard = null;
-	//玩家落子点得分
-	private boolean[][][] playerTable = null;  
-	//机器人落子点得分
-	private boolean[][][] robotTable = null; 
-	//所有能赢的情况
-	private int[][] win = null;
+	//所有棋局的情况
+	private ArrayList<Record> records = new ArrayList<Record>();
+	//用户名
+	private String name = null;
+	//密码
+	private String password = null;
+	//状态(普通用户 = false, 管理员 = true)
+	private boolean admin = false;
 
 	/**
 	 * <p>Title: put</p>
@@ -34,6 +37,14 @@ public class Player implements ChessPlayer{
 	 */
 	@Override
 	public void put(int row, int coll) {
+		//获取棋盘通用属性
+		Checkerboard checkerboard = null;
+		//玩家落子点得分
+		boolean[][][] playerTable = null;  
+		//机器人落子点得分
+		boolean[][][] robotTable = null; 
+		//所有能赢的情况
+		int[][] win = null;
 		//只有在规定范围内点击，才有效
 		//当前状态为true才可以操作
 		if(Common.getCommon().getCurrent_status()) {
@@ -65,7 +76,11 @@ public class Player implements ChessPlayer{
 				chessRecord[0] = row;
 				chessRecord[1] = coll;
 				//将下子位置添加进下子记录中
+				Double time = checkerboard.getGameTime();
 				checkerboard.getChessRecord().add(chessRecord);
+				//将下子时间添加到时间记录中
+				checkerboard.getTimeRecord().add(time);
+				System.out.println(time);
 
 				//将当前棋子颜色置为另一种
 				checkerboard.setCurrent_chess_piece(!current_chess_piece);
@@ -74,7 +89,7 @@ public class Player implements ChessPlayer{
 				win = checkerboard.getWin();
 				
 				for(int k = 0; k < 672; k++){
-					if(playerTable[row][coll][k] && this.win[0][k] != 7)
+					if(playerTable[row][coll][k] && win[0][k] != 7)
 						//给黑子的所有五连子可能的加载当前连子数
 						win[0][k]++;
 					if(robotTable[row][coll][k]){  
@@ -114,5 +129,32 @@ public class Player implements ChessPlayer{
 				}
 			}
 		}
+	}
+	public ArrayList<Record> getRecords() {
+		return records;
+	}
+	public void setRecords(ArrayList<Record> records) {
+		this.records = records;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public boolean isCurrent_chess_piece() {
+		return current_chess_piece;
+	}
+	public boolean isAdmin() {
+		return admin;
+	}
+	public void setAdmin(boolean admin) {
+		this.admin = admin;
 	}
 }

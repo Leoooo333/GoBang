@@ -4,6 +4,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import com.bpf.gobang.algorithm.CheckerboardAlgorithm;
+import com.bpf.gobang.algorithm.LoginAlgorithm;
 import com.bpf.gobang.algorithm.RobotAlgorithm;
 import com.bpf.gobang.entity.Checkerboard;
 import com.bpf.gobang.entity.Common;
@@ -17,7 +18,7 @@ public class CheckerboardMouseListener extends MouseAdapter{
 	private int i;
 	//存储当前点击点在数组中的索引j
 	private int j;
-	private ChessPlayer player = new Player();
+	private ChessPlayer player = LoginAlgorithm.getCurrentPlayer();
 	private ChessPlayer robot = new Robot();
 	RobotAlgorithm robotAlgorithm = new RobotAlgorithm();
 	
@@ -32,7 +33,8 @@ public class CheckerboardMouseListener extends MouseAdapter{
 				j = CheckerboardAlgorithm.calculationIndexByCoordinate(e.getY());
 				
 				if(Checkerboard.getCheckerboard(Common.TWOPLAYER).getCurrent_chess_piece()) {
-					robot.put(i,j);
+					//robot.put(i,j);
+					player.put(i,j);
 				}else {
 					player.put(i, j);
 				}

@@ -42,14 +42,16 @@ public class Checkerboard {
     private List<int[]> chessRecord;
     //下子相连点记录
     private List<int[]> chessConnectedRecord;
-    //光标位置
+    //落子点时间记录
+    private List<Double> timeRecord = new ArrayList<Double>();
+	//光标位置
     private int[] cursor_position;
     //当前棋子 false是黑色，true是白色
     private boolean current_chess_piece;
     //游戏结果 0为和棋，1为黑棋胜，2为白棋胜，3为胜利，4为失败
     private int game_result;
     //游戏时间
-    private int gameTime;
+    private double gameTime = 0;
     //计时器线程是否运行标志位
     private boolean timerRun;
     //玩家落子点获胜组合
@@ -96,12 +98,19 @@ public class Checkerboard {
 	public void setChessRecord(List<int[]> chessRecord) {
 		this.chessRecord = chessRecord;
 	}
+	
+	public List<Double> getTimeRecord() {
+		return timeRecord;
+	}
 
-	public int getGameTime() {
+	public void setTimeRecord(List<Double> timeRecord) {
+		this.timeRecord = timeRecord;
+	}
+	public double getGameTime() {
 		return gameTime;
 	}
 
-	public void setGameTime(int gameTime) {
+	public void setGameTime(double gameTime) {
 		this.gameTime = gameTime;
 	}
 	

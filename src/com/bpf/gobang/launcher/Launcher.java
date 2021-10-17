@@ -1,6 +1,10 @@
 package com.bpf.gobang.launcher;
 
+import com.bpf.gobang.algorithm.FileAlgorithm;
+import com.bpf.gobang.frame.LoginFrame;
 import com.bpf.gobang.frame.MenuFrame;
+import com.bpf.gobang.role.Player;
+import com.bpf.gobang.role.PlayerDataBase;
 /**
  * <p>Title: Launcher</p>
  * <p>Description: 游戏启动器</p>
@@ -10,6 +14,7 @@ import com.bpf.gobang.frame.MenuFrame;
  */
 public class Launcher {
 	public static void main(String[] args) {
-		MenuFrame.getMenuFrame();
+		PlayerDataBase plb = PlayerDataBase.getPlayerDataBase();
+		LoginFrame.getLoginFrame();
 	}
 }

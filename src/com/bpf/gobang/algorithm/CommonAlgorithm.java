@@ -41,10 +41,11 @@ public class CommonAlgorithm {
 		//根据当前页面选择使用的棋盘属性
 		Checkerboard checkerboard = Checkerboard.getCheckerboard(Common.getCommon().getCurrent_page());
 		//获取游戏时间
-		int gameTime = checkerboard.getGameTime();
+		double gameTime = checkerboard.getGameTime();
 		//进行格式转换
-		String minute = gameTime/60 < 10 ? "0" + (gameTime/60) : "" + (gameTime/60);
-		String second = gameTime%60 < 10 ? "0" + (gameTime%60) : "" + (gameTime%60);
+		int showgameTime = (int)gameTime;
+		String minute = showgameTime/60 < 10 ? "0" + (showgameTime/60) : "" + (showgameTime/60);
+		String second = showgameTime%60 < 10 ? "0" + (showgameTime%60) : "" + (showgameTime%60);
 		
 		return minute + ":" + second;
 	}

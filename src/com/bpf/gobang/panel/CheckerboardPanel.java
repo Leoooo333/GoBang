@@ -82,19 +82,36 @@ public class CheckerboardPanel extends JPanel{
 			
 			//获取当前棋盘信息
 			checkerboard_situation = checkerboard.getCheckerboardSituation();
+			
+			//棋子第step步
+			int step = -1; 
+			
 			//根据棋盘数组绘画棋盘上应有的棋子
 			for(int i = 0; i < checkerboard_situation.length; i++) {
 				for(int j = 0; j < checkerboard_situation.length; j++) {
+					int counts = 1;
+					for(int[] chess : checkerboard.getChessRecord()) {
+						if(chess[0] == i && chess[1] == j) {
+							step = counts;
+						}
+						counts++;
+					}
 					if(checkerboard_situation[i][j] == 1) {
 						g.drawImage(ImageIO.read(new File(universalBoard.getBLACK_CHESS_PIECES_IMAGE_URL())), //棋子图片
 								CheckerboardAlgorithm.calculationCoordinateByIndex(i), //棋子横坐标
 								CheckerboardAlgorithm.calculationCoordinateByIndex(j), //棋子纵坐标
 								this);
+						g.drawString(String.valueOf(step),
+								CheckerboardAlgorithm.calculationCoordinateByIndex(i), //棋子横坐标
+								CheckerboardAlgorithm.calculationCoordinateByIndex(j)); //棋子纵坐标
 					}else if(checkerboard_situation[i][j] == 2) {
 						g.drawImage(ImageIO.read(new File(universalBoard.getWHITE_CHESS_PIECES_IMAGE_URL())), 
 								CheckerboardAlgorithm.calculationCoordinateByIndex(i), 
 								CheckerboardAlgorithm.calculationCoordinateByIndex(j),
 								this);
+						g.drawString(String.valueOf(step),
+								CheckerboardAlgorithm.calculationCoordinateByIndex(i), //棋子横坐标
+								CheckerboardAlgorithm.calculationCoordinateByIndex(j)); //棋子纵坐标
 					}
 				}
 			}

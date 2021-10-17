@@ -46,8 +46,10 @@ public class ToolbarFunction {
 						int[] last = checkerboard.getChessRecord().get(length - 1);
 						//清除当期棋局，最后下的棋子
 						checkerboard.getCheckerboardSituation()[last[0]][last[1]] = 0;
-						//清除当前棋局记录，最后下的棋子
+						//清除当前棋局记录，最后下的棋子，将其赋值为[-1, -1]
 						checkerboard.getChessRecord().remove(length - 1);
+						int[] regret = {-1,-1};
+						checkerboard.getChessRecord().add(regret);
 						//
 						checkerboard.setCurrent_chess_piece(!checkerboard.getCurrent_chess_piece());
 						

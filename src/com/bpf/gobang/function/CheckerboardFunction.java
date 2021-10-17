@@ -3,8 +3,12 @@ package com.bpf.gobang.function;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
+import com.bpf.gobang.algorithm.LoginAlgorithm;
 import com.bpf.gobang.entity.Checkerboard;
 import com.bpf.gobang.entity.Common;
+import com.bpf.gobang.entity.Record;
 import com.bpf.gobang.frame.CheckerboardFrame;
 import com.bpf.gobang.frame.MenuFrame;
 import com.bpf.gobang.function.runnable.ConnectedPiecesFlashRunnable;
@@ -13,6 +17,8 @@ import com.bpf.gobang.panel.CheckerboardPanel;
 import com.bpf.gobang.panel.ToolbarPanel;
 import com.bpf.gobang.panel.WinPanel;
 import com.bpf.gobang.role.ChessPlayer;
+import com.bpf.gobang.role.Player;
+import com.bpf.gobang.role.PlayerDataBase;
 import com.bpf.gobang.role.Robot;
 
 /**
@@ -84,13 +90,50 @@ public class CheckerboardFunction {
 	 */
 	public static void backToMenu() {
 		//根据当前页面选择使用的棋盘属性
-		Checkerboard checkerboard = Checkerboard.getCheckerboard(Common.getCommon().getCurrent_page());
+		Checkerboard checkerboard = Checkerboard.getCheckerboard(Common.getCommon().getCurrent_page());	
+		if(Common.getCommon().getCurrent_page().equals(Common.TWOPLAYER)) {
+			//存储棋盘数据(双人对战存储， 人机对战不存储)
+			Record record = new Record();
+			record.setName(LoginAlgorithm.getCurrentFighter().getName());
+			record.setChessRecord((ArrayList<int[]>) checkerboard.getChessRecord());
+			record.setCheckerboardSituation(checkerboard.getCheckerboardSituation());
+			record.setTimeRecord((ArrayList<Double>) checkerboard.getTimeRecord());
+			
+			LoginAlgorithm.getCurrentPlayer().getRecords().add(record);
+			
+			PlayerDataBase plb = PlayerDataBase.getPlayerDataBase();
+			plb.update();
+		}
+		//清空棋盘
+		checkerboard.setCheckerboardSituation(new int[16][16]);
+		//清空棋盘下子记录
+		checkerboard.setChessRecord(new ArrayList<int[]>());
+		//当前棋子置为黑色
+		checkerboard.setCurrent_chess_piece(false);
+		//将计时器归0
+		checkerboard.setGameTime(0);
+		//将当前状态置为true
+		Common.getCommon().setCurrent_status(true);
+		//初始化获胜组合
+		checkerboard.initWinCombination();
+		//初始化
+		checkerboard.setWin(new int[2][672]);
+		//
+		checkerboard.setWinRecord(new ArrayList<int[][]>());
+		//
+		checkerboard.setPlayerTableRecord(new ArrayList<boolean[][][]>());
+		//
+		checkerboard.setRobotTableRecord(new ArrayList<boolean[][][]>());
 		
+		//初始化玩家与电脑得分
+		checkerboard.setScores(new int[2][16][16]);
 		//关闭计时器线程
 		checkerboard.setTimerRun(false);
 		//点击此按钮关闭棋盘窗体，打开菜单窗体
 		CheckerboardFrame.getCheckerboardFrame().dispose();
+		JOptionPane.showMessageDialog(null, "存档成功！");
 		MenuFrame.getMenuFrame().setVisible(true);
+		
 	}
 	
 	/**

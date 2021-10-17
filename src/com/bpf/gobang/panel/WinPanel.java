@@ -53,7 +53,7 @@ public class WinPanel extends JPanel{
      */
     public void init() {
     	//设置此面板出现的位置以及大小
-    	this.setBounds(0, 0, 900, 800);
+    	this.setBounds(0, 0, 900 -120 , 800 - 120);
     	//加入监听器
 		this.addMouseListener(new WinMouseListener());
 		this.addMouseMotionListener(new WinMouseMotionListener());
@@ -82,7 +82,7 @@ public class WinPanel extends JPanel{
 			g.setColor(Color.BLACK);
 			g.drawString(CommonAlgorithm.timeFormat(), 490, 418);
 			if(checkerboard.getGame_result() == 0) {
-				g.drawString(String.valueOf(19*19), 490, 459);
+				g.drawString(String.valueOf(16*16), 490, 459);
 			}else {
 				g.drawString(String.valueOf(CommonAlgorithm.stepCount()), 490, 459);
 			}
