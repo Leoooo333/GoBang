@@ -63,9 +63,13 @@
   
   2. **modify the _init()_ method**  
     
+  > Generate the users within the /* ... */ code  
+	  
+  > Then  
+	  
   > Enable the code within /* ... */ for test
     
-  ```java  
+  ```Java  
 	public void init() {
 		
 		  /*this.PlayersList = new ArrayList<Player>(); for(int i = 0; i < 10; i++) {
