@@ -64,9 +64,9 @@
   2. **modify the _init()_ method**  
     
   > Generate the users within the /* ... */ code  
-	  
-  > Then  
-	  
+  >   
+  > Then
+  > 	  
   > Enable the code within /* ... */ for test
     
   ```Java  
